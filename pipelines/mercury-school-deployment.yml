@@ -1,0 +1,18 @@
+trigger:
+  - main
+
+variables:
+  - group: deploymentVariables
+
+pool:
+  name: ubuntu-latest
+
+stages:
+  - stage: build
+    displayName: Build ARM Template
+    jobs:
+      - job: build
+        steps:
+          - task: @AzureCLI@2
+            displayName: Build bicep artifact
+

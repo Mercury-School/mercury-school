@@ -3,6 +3,7 @@ param administratorLoginPassword string
 
 var resourceGroupName = resourceGroup().name
 var vnetName = '${resourceGroupName}-vnet'
+
 var dnsZoneName = '${resourceGroupName}.cloud'
 var appServicePlanName = '${resourceGroupName}-app-service-plan'
 var webAppName = '${resourceGroupName}-web-api'

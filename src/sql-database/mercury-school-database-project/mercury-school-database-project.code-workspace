@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"dataworkspace.projects": [
+			"mercury-school-database-project.sqlproj"
+		]
+	}
+}

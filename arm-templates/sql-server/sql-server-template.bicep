@@ -20,3 +20,11 @@ resource database 'Microsoft.Sql/servers/databases@2020-11-01-preview' = {
     tier: 'Basic'
   }
 }
+
+resource firewallRuleAzureService 'Microsoft.Sql/servers/firewallRules@2020-11-01-preview' = {
+  name: '${server.name}/AllowAllWindowsAzureIps'
+  properties: {
+    startIpAddress: '0.0.0.0'
+    endIpAddress: '0.0.0.0'
+  }
+}
