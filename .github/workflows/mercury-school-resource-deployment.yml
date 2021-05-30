@@ -18,10 +18,10 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Checkout Source Code
+      - name: Checkout source code
         uses: actions/checkout@v2
 
-      - name: Deploy ARM Template
+      - name: Deploy ARM template
         uses: azure/CLI@v1
         with:
           inlineScript: |
