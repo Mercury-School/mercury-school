@@ -27,7 +27,7 @@ jobs:
           inlineScript: |
           az group create \
           --name ${{ env.ResourceGroupName }} \
-          --location northcentralus
+          --location northcentralus \
           --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy ARM template
