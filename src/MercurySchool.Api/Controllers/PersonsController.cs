@@ -28,7 +28,7 @@ namespace MercurySchool.Api.Controllers
         /// </summary>
         /// <returns><c>List<Person></c></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAsync([FromQuery] PaginationFilter filter)
+        public async Task<IActionResult> GetAsync([FromQuery] PaginationFilter paginationFilter)
         {
             try
             {

@@ -21,12 +21,21 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
 
+      - name: Create Resource Group
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+          az group create \
+          --name ${{ env.ResourceGroupName }} \
+          --location northcentralus
+          --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Deploy ARM template
         uses: azure/CLI@v1
         with:
           inlineScript: |
             az deployment group create \
-            --name mercury-shcool-deployment \
+            --name mercury-school-deployment \
             -g ${{ env.ResourceGroupName }} \
             -f ./arm-templates/main.bicep \
-            --parameters administratorLogin=${{ secrets.SQL_ADMINISTRATOR_LOGIN }} administratorLoginPassword=${{ secrets.SQL_ADMINISTRATOR_LOGIN_PASSWORD }}
+            --parameters administratorLogin=${{ secrets.SQL_ADMINISTRATOR_LOGIN }} administratorLoginPassword=${{ secrets.SQL_ADMINISTRATOR_LOGIN_PASSWORD }} adAdminlogin=${{ secrets.AZURE_AD_ADMINISTRATOR_LOGIN }} adAdminSid=${{ secrets.AZURE_AD_ADMINISTRATOR_SID }} adAdminTenantId=${{ secrets.AZURE_AD_ADMINISTRATOR_TENANT_ID }}

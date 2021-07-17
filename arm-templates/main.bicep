@@ -1,5 +1,8 @@
 param administratorLogin string
 param administratorLoginPassword string
+param adAdminlogin string
+param adAdminSid string
+param adAdminTenantId string
 
 var resourceGroupName = resourceGroup().name
 var vnetName = '${resourceGroupName}-vnet'
@@ -7,13 +10,15 @@ var vnetName = '${resourceGroupName}-vnet'
 var dnsZoneName = '${resourceGroupName}.cloud'
 var appServicePlanName = '${resourceGroupName}-app-service-plan'
 var webAppName = '${resourceGroupName}-web-api'
-var privateEndpointName = '${resourceGroupName}-sql-private-endpoint'
 
 var sqlServerParameters = {
   'serverName': '${resourceGroupName}-sql-server'
   'databaseName': 'MercurySchool'
   'administratorLogin': administratorLogin
   'administratorLoginPassword': administratorLoginPassword
+  'adAdminlogin': adAdminlogin
+  'adAdminSid': adAdminSid
+  'adAdminTenantId': adAdminTenantId
 }
 
 module vnetDeployment 'vnet/vnet-template.bicep' = {

@@ -12,13 +12,13 @@ namespace MercurySchool.Api.UnitTests.ModelTests
         public void PaginationFilterReturnsPagingValues(int pageNumber, int pageSize)
         {
             // Arrange
-            var paginationFilter = new PaginationFilter();
+            var paginationFilter = new PaginationFilter(pageNumber, pageSize);
 
             // Act
 
             // Assert
             paginationFilter.PageNumber.Should().Be(pageNumber, $"PageNumber size is not { pageNumber }.");
-            paginationFilter.PageSize.Should().Be(pageSize, $"PageSize is not { pageSize}.");
+            paginationFilter.PageSize.Should().Be(pageSize, $"PageSize is not { pageSize }.");
         }
     }
 }
