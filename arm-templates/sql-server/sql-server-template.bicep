@@ -1,14 +1,16 @@
-param sqlServerParameters object
+param serverName string
+param administratorLogin string
+param administratorLoginPassword string
 
 resource server 'Microsoft.Sql/servers@2020-11-01-preview' = {
-  name: sqlServerParameters.serverName
+  name: serverName
   location: resourceGroup().location
   identity: {
     type: 'SystemAssigned'
   }
   properties: {
-    administratorLogin: sqlServerParameters.administratorLogin
-    administratorLoginPassword: sqlServerParameters.administratorLoginPassword
+    administratorLogin: administratorLogin
+    administratorLoginPassword: administratorLoginPassword
   }
 }
 
