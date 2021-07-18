@@ -37,4 +37,5 @@ jobs:
             az deployment group create \
             --name mercury-school-deployment \
             -g ${{ env.ResourceGroupName }} \
-            -f ./arm-templates/main.bicep
+            -f ./arm-templates/main.bicep \
+            --parameters runid=${{github.run_number}}

@@ -1,3 +1,4 @@
+param runid string
 // param administratorLogin string
 // param administratorLoginPassword string
 // param adAdminlogin string
@@ -7,7 +8,7 @@
 var resourceGroupName = resourceGroup().name
 var vnetName = '${resourceGroupName}-vnet'
 
-// var dnsZoneName = '${resourceGroupName}.cloud'
+var dnsZoneName = '${resourceGroupName}.cloud'
 // var appServicePlanName = '${resourceGroupName}-app-service-plan'
 // var webAppName = '${resourceGroupName}-web-api'
 
@@ -22,19 +23,20 @@ var vnetName = '${resourceGroupName}-vnet'
 // }
 
 module vnetDeployment 'vnet/vnet-template.bicep' = {
-  name: '${vnetName}-deployment'
+  name: '${vnetName}-deployment-${runid}'
   params: {
     vnetName: vnetName
   }
 }
 
-// module dnsZoneDeployment 'private-dns-zone/private-dns-zone-template.bicep' = {
-//   name: '${dnsZoneName}-dns-zone-deployment'
-//   params: {
-//     dnsZoneName: dnsZoneName
-//     ventId: vnetDeployment.outputs.vnetId
-//   }
-// }
+module dnsZoneDeployment 'private-dns-zone/private-dns-zone-template.bicep' = {
+  name: '${dnsZoneName}-dns-zone-deployment-${runid}'
+  params: {
+    dnsZoneName: dnsZoneName
+    ventId: vnetDeployment.outputs.vnetId
+  }
+}
+
 // module sqlServerDeployment 'sql-server/sql-server-template.bicep' = {
 //   name: '${sqlServerParameters.serverName}-deployment'
 //   params: {
