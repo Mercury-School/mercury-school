@@ -1,8 +1,8 @@
-param administratorLogin string
-param administratorLoginPassword string
-param adAdminlogin string
-param adAdminSid string
-param adAdminTenantId string
+// param administratorLogin string
+// param administratorLoginPassword string
+// param adAdminlogin string
+// param adAdminSid string
+// param adAdminTenantId string
 
 var resourceGroupName = resourceGroup().name
 var vnetName = '${resourceGroupName}-vnet'
