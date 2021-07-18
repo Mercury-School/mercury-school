@@ -39,4 +39,4 @@ jobs:
             --name mercury-school-deployment-${{github.run_number}} \
             -g ${{ env.ResourceGroupName }} \
             -f ./arm-templates/main.bicep \
-            --parameters runid=${{github.run_number}} administratorLogin=${{ secrets.SQL_ADMINISTRATOR_LOGIN }} administratorLoginPassword=${{ secrets.SQL_ADMINISTRATOR_LOGIN_PASSWORD }} adAdminlogin=${{ secrets.AZURE_AD_ADMINISTRATOR_LOGIN }} adAdminSid=${{ secrets.AZURE_AD_ADMINISTRATOR_SID }} adAdminTenantId=${{ secrets.AZURE_AD_ADMINISTRATOR_TENANT_ID }}
+            --parameters runid=${{github.run_number}} administratorLogin=${{ secrets.SQL_ADMINISTRATOR_LOGIN }} administratorLoginPassword=${{ secrets.SQL_ADMINISTRATOR_LOGIN_PASSWORD }} 
