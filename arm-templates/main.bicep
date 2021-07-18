@@ -47,8 +47,8 @@ module appServicePlanDeployment 'app-service-plan/web-app-service-plan-template.
   params: {
     appServicePlanName: appServicePlanName
     webAppName: webAppName
-    vnetWebSubNetId: vnetDeployment.outputs.vnetWebSubNetId
-    vnetName: vnetName
+    // vnetWebSubNetId: vnetDeployment.outputs.vnetWebSubNetId
+    // vnetName: vnetName
   }
 }
 

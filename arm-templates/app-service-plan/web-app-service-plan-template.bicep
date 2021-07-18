@@ -1,7 +1,7 @@
 param appServicePlanName string
 param webAppName string
-param vnetWebSubNetId string
-param vnetName string
+// param vnetWebSubNetId string
+// param vnetName string
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2020-12-01' = {
   name: appServicePlanName
