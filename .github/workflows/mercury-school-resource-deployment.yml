@@ -36,7 +36,7 @@ jobs:
         with:
           inlineScript: |
             az deployment group create \
-            --name mercury-school-deployment \
-            -g ${{ env.ResourceGroupName }}-${{github.run_number}} \
+            --name mercury-school-deployment-${{github.run_number}} \
+            -g ${{ env.ResourceGroupName }} \
             -f ./arm-templates/main.bicep \
             --parameters runid=${{github.run_number}}
