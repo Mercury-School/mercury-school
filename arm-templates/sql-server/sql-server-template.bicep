@@ -1,6 +1,7 @@
 param serverName string
 param administratorLogin string
 param administratorLoginPassword string
+param databaseName string
 
 resource server 'Microsoft.Sql/servers@2020-11-01-preview' = {
   name: serverName
@@ -14,14 +15,14 @@ resource server 'Microsoft.Sql/servers@2020-11-01-preview' = {
   }
 }
 
-// resource database 'Microsoft.Sql/servers/databases@2020-11-01-preview' = {
-//   name: '${server.name}/${sqlServerParameters.databaseName}'
-//   location: resourceGroup().location
-//   sku: {
-//     name: 'Basic'
-//     tier: 'Basic'
-//   }
-// }
+resource database 'Microsoft.Sql/servers/databases@2020-11-01-preview' = {
+  name: '${server.name}/${databaseName}'
+  location: resourceGroup().location
+  sku: {
+    name: 'Basic'
+    tier: 'Basic'
+  }
+}
 
 // resource activeDiractoryAdmin 'Microsoft.Sql/servers/administrators@2021-02-01-preview' = {
 //   name: '${server.name}/ActiveDirectory'

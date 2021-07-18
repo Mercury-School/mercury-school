@@ -44,6 +44,7 @@ module sqlServerDeployment 'sql-server/sql-server-template.bicep' = {
     administratorLogin: administratorLogin
     administratorLoginPassword: administratorLoginPassword
     serverName: sqlServerName
+    databaseName: 'MercurySchool'
   }
 }
 
