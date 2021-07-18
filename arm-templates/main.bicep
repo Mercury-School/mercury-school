@@ -38,7 +38,7 @@ module dnsZoneDeployment 'private-dns-zone/private-dns-zone-template.bicep' = {
 }
 
 module sqlServerDeployment 'sql-server/sql-server-template.bicep' = {
-  name: '${sqlServerParameters.serverName}-deployment'
+  name: '${sqlServerParameters.serverName}-deployment-${runid}'
   params: {
     sqlServerParameters: sqlServerParameters
   }
