@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MercurySchool.Api", "src\Me
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CF23E83B-0635-4314-A12B-EB55903EFC88}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mercury-school-unit-tests", "test\MercurySchool.Api.UnitTests\mercury-school-unit-tests.csproj", "{A3CE0D26-7EEE-436A-B643-B9DC1A101CF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MercurySchool.APi.UnitTests", "test\MercurySchool.Api.UnitTests\MercurySchool.APi.UnitTests.csproj", "{A3CE0D26-7EEE-436A-B643-B9DC1A101CF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
