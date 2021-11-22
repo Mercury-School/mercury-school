@@ -1,11 +1,10 @@
-namespace MercurySchool.Api.Models
+namespace MercurySchool.Api.Models;
+
+public class Person
 {
-    public class Person
-    {
-        public string FirstName { get; init; }
+    public string FirstName { get; init; }
 
-        public string MiddleName { get; init; }
+    public string MiddleName { get; init; }
 
-        public string LastName { get; init; }
-    }
+    public string LastName { get; init; }
 }
