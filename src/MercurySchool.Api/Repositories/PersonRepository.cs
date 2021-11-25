@@ -11,6 +11,40 @@ public class PersonRepository : RepositoryBase, IPersonRepository
         _logger = logger;
     }
 
+    public async Task<Person> GetPersonAsync(int id)
+    {
+        _logger.LogTrace($"{nameof(GetPersonAsync)} called.");
+
+        using var sqlConnection = new SqlConnection(_sqlConnectionString);
+        using var sqlCommand = sqlConnection.CreateCommand();
+
+        sqlCommand.CommandText = CreateCommandText(nameof(GetPersonAsync));
+        sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+        sqlCommand.Parameters.AddWithValue("@Id", id);
+
+        await sqlCommand.Connection.OpenAsync();
+        using var reader = await sqlCommand.ExecuteReaderAsync();
+
+        if (!reader.HasRows)
+        {
+            _logger.LogTrace($"Given the id {id}, {nameof(GetPersonAsync)} did not find any data.");
+            return null;
+        }
+
+        await reader.ReadAsync();
+
+        var person = new Person
+        {
+            Id = (int)reader["Id"],
+            FirstName = reader["FirstName"] as string,
+            MiddleName = reader["MiddleName"] as string,
+            LastName = reader["LastName"] as string
+        };
+
+        return person;
+    }
+
     public async Task<List<Person>> GetPersonsAsync(int? offset = null, int? fetch = null)
     {
         _logger.LogTrace($"{nameof(GetPersonsAsync)} called.");
@@ -20,6 +54,7 @@ public class PersonRepository : RepositoryBase, IPersonRepository
 
         sqlCommand.CommandText = CreateCommandText(nameof(GetPersonsAsync));
         sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
         sqlCommand.Parameters.AddWithValue("@Offset", offset);
         sqlCommand.Parameters.AddWithValue("@fetch", fetch);
 

@@ -1,4 +1,5 @@
 ﻿global using FluentAssertions;
+global using MercurySchool.Api.Models;
 global using MercurySchool.Api.Models.Settings;
 global using MercurySchool.Api.Repositories;
 global using Microsoft.Extensions.Configuration;
