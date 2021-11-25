@@ -1,3 +1,5 @@
+using System;
+
 namespace MercurySchool.Api.Repositories;
 
 public class PersonRepository : RepositoryBase, IPersonRepository
@@ -7,7 +9,7 @@ public class PersonRepository : RepositoryBase, IPersonRepository
 
     public PersonRepository(IOptions<DatabaseOptions> options, ILogger<PersonRepository> logger)
     {
-        _sqlConnectionString = GetSqlConnectionString(options.Value);
+        _sqlConnectionString = CreateSqlConnectionString(options.Value);
         _logger = logger;
     }
 
@@ -84,5 +86,32 @@ public class PersonRepository : RepositoryBase, IPersonRepository
 
         _logger.LogTrace($"{nameof(GetPersonsAsync)} returned ${persons.Count} rows.");
         return persons;
+    }
+
+    public async Task<int?> InsertPersonAsync(Person person)
+    {
+        _logger.LogTrace($"{nameof(InsertPersonAsync)} called.");
+
+        using var sqlConnection = new SqlConnection(_sqlConnectionString);
+        using var sqlCommand = sqlConnection.CreateCommand();
+
+        sqlCommand.CommandText = CreateCommandText(nameof(InsertPersonAsync));
+        sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+        _ = sqlCommand.Parameters.AddWithValue("@FirstName", person.FirstName);
+        _ = sqlCommand.Parameters.AddWithValue("@MiddleName", person.MiddleName);
+        _ = sqlCommand.Parameters.AddWithValue("@LastName", person.LastName);
+
+        var idParameter = new SqlParameter("@Id", System.Data.SqlDbType.Int)
+        {
+            Direction = System.Data.ParameterDirection.Output
+        };
+
+        sqlCommand.Parameters.Add(idParameter);
+
+        await sqlCommand.Connection.OpenAsync();
+        _ = await sqlCommand.ExecuteNonQueryAsync();
+
+        return idParameter.Value == DBNull.Value ? null : (int?)idParameter.Value;
     }
 }

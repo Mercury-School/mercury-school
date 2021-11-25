@@ -25,7 +25,7 @@ public class RepositoryBaseTests
         var databaseOptions = CreateDatabaseOptions();
 
         // Act
-        var result = RepositoryBase.GetSqlConnectionString(databaseOptions.Value);
+        var result = RepositoryBase.CreateSqlConnectionString(databaseOptions.Value);
 
         // Assert
         _ = result.Should().NotBeNull();

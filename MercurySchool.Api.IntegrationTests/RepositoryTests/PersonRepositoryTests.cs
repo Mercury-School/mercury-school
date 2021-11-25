@@ -34,5 +34,25 @@
             // Assert
             _ = result.Should().BeOfType<Person>();
         }
+
+        [Theory(DisplayName = "InsertPersonAsync should accept parameters.")]
+        [InlineData("John", "Q", "Public")]
+        [InlineData("John", null, "Public")]
+        public async Task InsertPersonAsyncShouldAcceptParameters(string? firstName, string? middelName, string? lastName)
+        {
+            // Arrange
+            var person = new Person
+            {
+                FirstName = firstName,
+                MiddleName = middelName,
+                LastName = lastName
+            };
+
+            // Act
+            var result = await _personRepository.InsertPersonAsync(person);
+
+            // Assert
+            _ = result.Should().BePositive();
+        }
     }
 }

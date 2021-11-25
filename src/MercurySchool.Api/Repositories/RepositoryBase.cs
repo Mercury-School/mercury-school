@@ -2,7 +2,7 @@
 
 public class RepositoryBase
 {
-    internal static string GetSqlConnectionString(DatabaseOptions options)
+    internal static string CreateSqlConnectionString(DatabaseOptions options)
     {
         var connectionStringBuilder = new SqlConnectionStringBuilder
         {
@@ -23,7 +23,7 @@ public class RepositoryBase
     internal static string CreateCommandText(string methodName)
     {
         var suffixStart = methodName.LastIndexOf("Async");
-        var storeProcedureName = methodName.Substring(0, suffixStart);
+        var storeProcedureName = methodName[..suffixStart];
 
         return $"api.{storeProcedureName}";
     }

@@ -1,6 +1,6 @@
 namespace MercurySchool.Api.Models;
 
-public class Person
+public record Person
 {
     public int Id { get; init; }
 

@@ -16,4 +16,12 @@ public interface IPersonRepository
     /// <param name="id">Primary key</param>
     /// <returns>An instance of <c>Person</c></returns>
     Task<Person> GetPersonAsync(int id);
+
+    /// <summary>
+    /// <para>Insert person into the <c>dbo.Person</c> table</para>
+    /// <para>Null return value indicates failed insert.</para>
+    /// </summary>
+    /// <param name="person">Instance of <c>Person</c></param>
+    /// <returns>Newly created primary key</returns>
+    Task<int?> InsertPersonAsync(Person person);
 }
