@@ -7,7 +7,7 @@ public class PersonsControllerTests
     {
         // Arrange
         var personRepository = new Mock<IPersonRepository>();
-        personRepository.Setup(x => x.GetPersonsAsync()).ReturnsAsync(new List<Person>());
+        personRepository.Setup(x => x.GetPersonsAsync(It.IsAny<int?>(), It.IsAny<int?>())).ReturnsAsync(new List<Person>());
 
         var personController = new PersonsController(new NullLogger<PersonsController>(), personRepository.Object);
 
@@ -15,7 +15,7 @@ public class PersonsControllerTests
         var sut = await personController.GetAsync(DefaultPaginationFilter()) as OkObjectResult;
 
         // Assert
-        personRepository.Verify(x => x.GetPersonsAsync());
+        personRepository.Verify(x => x.GetPersonsAsync(It.IsAny<int?>(), It.IsAny<int?>()));
 
         sut.Should().BeOfType<OkObjectResult>("system under test is not an object of type OkObjectResult.");
 
@@ -29,7 +29,7 @@ public class PersonsControllerTests
     {
         // Arrange
         var personRepository = new Mock<IPersonRepository>();
-        personRepository.Setup(x => x.GetPersonsAsync()).ReturnsAsync((List<Person>)null);
+        personRepository.Setup(x => x.GetPersonsAsync(It.IsAny<int?>(), It.IsAny<int?>())).ReturnsAsync((List<Person>)null);
 
         var personController = new PersonsController(new NullLogger<PersonsController>(), personRepository.Object);
 
@@ -40,5 +40,5 @@ public class PersonsControllerTests
         sut.Should().BeOfType<NoContentResult>("system under test is not an object of type NoContentResult.");
     }
 
-    private static PaginationFilter DefaultPaginationFilter() => new PaginationFilter(1, 25);
+    private static PaginationFilter DefaultPaginationFilter() => new(1, 25);
 }

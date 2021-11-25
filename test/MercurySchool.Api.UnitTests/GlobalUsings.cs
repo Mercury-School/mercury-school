@@ -2,11 +2,15 @@
 global using MercurySchool.Api.Controllers;
 global using MercurySchool.Api.Models;
 global using MercurySchool.Api.Models.Filters;
+global using MercurySchool.Api.Models.Settings;
 global using MercurySchool.Api.Models.Wrappers;
 global using MercurySchool.Api.Repositories;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.Logging.Abstractions;
+global using Microsoft.Extensions.Options;
 global using Moq;
+global using System;
 global using System.Collections.Generic;
 global using System.Threading.Tasks;
 global using Xunit;

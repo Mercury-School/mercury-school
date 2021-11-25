@@ -9,13 +9,26 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddScoped<IPersonRepository, PersonRepository>();
-
-        services.AddControllers();
-        services.AddSwaggerGen(c =>
+        var databaseOptions = new DatabaseOptions
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "MercurySchool.Api", Version = "v1" });
-        });
+            DataSource = Configuration.GetValue<string>("DataSource"),
+            InitialCatalog = Configuration.GetValue<string>("InitialCatalog"),
+            UserID = Configuration.GetValue<string>("UserID"),
+            Password = Configuration.GetValue<string>("Password"),
+        };
+
+        _ = services.Configure<DatabaseOptions>(options =>
+          {
+              options = databaseOptions;
+          });
+
+        _ = services.AddScoped<IPersonRepository, PersonRepository>();
+
+        _ = services.AddControllers();
+        _ = services.AddSwaggerGen(c =>
+          {
+              c.SwaggerDoc("v1", new OpenApiInfo { Title = "MercurySchool.Api", Version = "v1" });
+          });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,15 +41,14 @@ public class Startup
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MercurySchool.Api v1"));
         }
 
-        app.UseHttpsRedirection();
+        _ = app.UseHttpsRedirection();
+        _ = app.UseRouting();
 
-        app.UseRouting();
+        _ = app.UseAuthorization();
 
-        app.UseAuthorization();
-
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllers();
-        });
+        _ = app.UseEndpoints(endpoints =>
+          {
+              endpoints.MapControllers();
+          });
     }
 }

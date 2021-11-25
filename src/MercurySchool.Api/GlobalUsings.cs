@@ -1,5 +1,6 @@
 ﻿global using MercurySchool.Api.Models;
 global using MercurySchool.Api.Models.Filters;
+global using MercurySchool.Api.Models.Settings;
 global using MercurySchool.Api.Models.Wrappers;
 global using MercurySchool.Api.Repositories;
 global using Microsoft.AspNetCore.Builder;
@@ -9,6 +10,8 @@ global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Hosting;
 global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;
 global using Microsoft.OpenApi.Models;
 global using System.Collections.Generic;
+global using System.Data.SqlClient;
 global using System.Threading.Tasks;
