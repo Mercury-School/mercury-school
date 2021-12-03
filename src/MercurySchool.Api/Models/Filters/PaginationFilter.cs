@@ -12,6 +12,16 @@ public class PaginationFilter
     /// </summary>
     public int PageSize { get; set; } = 25;
 
+    /// <summary>
+    /// Value passed to Offset paraemter in stored procedure.
+    /// </summary>
+    public int Offset => PageNumber * PageSize;
+
+    /// <summary>
+    /// Value passed to Fetch paraemter in stored procedure.
+    /// </summary>
+    public int Fetch => PageSize;
+
     public PaginationFilter(int pageNumber = 1, int pageSize = 25)
     {
         PageNumber = pageNumber < 1 ? 1 : pageNumber;

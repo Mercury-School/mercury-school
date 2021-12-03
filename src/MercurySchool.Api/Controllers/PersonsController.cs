@@ -23,7 +23,7 @@ public class PersonsController : ControllerBase
         try
         {
             var persons = await _personRepository.GetPersonsAsync();
-            var pagedResponse = new PagedResponse<List<Person>>(persons, 1, 25);
+            var pagedResponse = new PagedResponse<List<Person>>(persons, paginationFilter.Offset, paginationFilter.Fetch);
 
             if (persons is not null)
             {
@@ -33,9 +33,9 @@ public class PersonsController : ControllerBase
 
             return NoContent();
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
-            _logger.LogError(ex, ex.Message);
+            _logger.LogError(ex, "Unable to retrieve data.");
             return StatusCode(500);
         }
 
